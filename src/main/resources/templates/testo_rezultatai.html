@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Atsakymai</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+	<link rel="stylesheet" href="menu.css">
+	<link rel="stylesheet" href="common.css">
+	<style>
+		
+	</style>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		var dialog, form,
+		pav = $( "#pav" ),
+		allFields = $( [] ).add( pav),
+		tips = $( ".validateTips" );
+	 
+		function updateTips( t ) {
+		      tips
+			.text( t )
+			.addClass( "ui-state-highlight" );
+		      setTimeout(function() {
+			tips.removeClass( "ui-state-highlight", 1500 );
+		      }, 500 );
+		}
+ 
+		function checkLength( o, n, min, max ) {
+			if ( o.val().length > max || o.val().length < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n +  " ilgis turi būti tarp " +
+				  min + " ir " + max + " raidžių." );
+				return false;
+			} else {
+				return true;
+		      }
+		}
+		function checkNumber( o, n, min, max ) {
+			if ( parseInt ( o.val() ) > max || parseInt ( o.val() ) < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n +  " reikšmė turi būti tarp " +
+				  min + " ir " + max + "." );
+				return false;
+			} else {
+				return true;
+		      }
+		}
+		function checkRegexp( o, regexp, n ) {
+			if ( !( regexp.test( o.val() ) ) ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n );
+				return false;
+			} else {
+				return true;
+		      }
+		}
+	 
+		function addProduct() {
+			var valid = true;
+			 allFields.removeClass( "ui-state-error" );
+		 
+			valid = valid && checkLength( pav, "Atsakimo pavadinimo", 1, 30 );
+
+			if ( valid ) {
+				
+				$( '#produkto_forma' ).submit();
+				dialog.dialog( "close" );
+			
+				
+			}
+			return valid;
+		}
+	 
+		dialog = $( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 400,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Sukurti": addProduct,
+				Atšaukti: function() {
+					dialog.dialog( "close" );
+				}
+			},
+			close: function() {
+				form[ 0 ].reset();
+				allFields.removeClass( "ui-state-error" );
+			}
+		});
+	 
+		form = dialog.find( "form" );  
+		
+		trintidialog = $( "#dialog-confirm" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+				"Ištrinti įrašą": function() {
+					$( '#salinimo_forma' ).submit();
+					$( this ).dialog( "close" );
+				},
+				Atšaukti: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+		$( "#create-product" ).button().on( "click", function() {
+		
+			$( '#pav_veiksmo' ).html ( 'Kuriamas naujas įrašas' );
+			$( '#veiksmas' ).val ( 'papildyti' );
+			dialog.dialog( "open" );
+		});
+		$( ".keisti" ).each ( function() {
+		
+			$( this ).on( "click", function() {
+			
+				id = $( this ).data( 'id' );
+				$( '#id_taisomo_iraso' ).val ( id);
+				$( '#pav_veiksmo' ).html (  'Koreguojamas įrašas' );
+				$('#pav').val( $( this ).data ( 'pav' ));
+				$( '#veiksmas' ).val ( 'pakeisti' );
+				dialog.dialog( "open" );	
+			});
+		});
+		$( ".salinti" ).each ( function() {
+		
+			$( this ).on( "click", function() {
+			
+				id = $( this ).data( 'id' );
+				$( '#id_salinamo_iraso' ).val ( id );
+				$( '#pav_salinamo_iraso' ).html ( $( this ).data ( 'pav' ) );				
+				trintidialog.dialog( "open" );	
+			});
+		});
+	});
+  </script>
+</head>
+<body>
+	<div id="menu">
+		<ul id="menu_sarasas">
+			<li id="menu_punktas" th:each="menu_item : ${lst_menu}">
+				<a th:href="${menu_item.itemurl()}" th:text="${menu_item.naujasPavadinimas()}" th:attr="class=${menu_item.itemurl()}=='/ataskaita' ? 'active' : 'zzz'"></a>
+			</li>
+		</ul>
+	</div>
+	<div id="main">
+		<h3>Test rezult</h3>
+		<table id="duombazes_lentele">
+			<thead>
+			<tr>
+				<th>Klausimas</th>
+				<th>Verte</th>
+				<th>Atsakymas</th>
+				<th>Teisingas</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="testas: ${stud_testas}">
+				<td th:text="${testas.getKlausimai().getPav()}">
+				 </td>
+				<td th:text="${testas.getKlausimai().getVerte()}">
+				 </td>				 
+				<td th:text="${testas.getAtsakymai().getPav()}">
+				</td>
+				<td th:text="${testas.getAtsakymai().getTeisingas()}">
+				</td>				
+			</tr>
+			</tbody>
+		</table>
+		Balas <span class="ivert" th:text="${balas}"></span> iš <span class="ivert" th:text="${balu}"></span>
+	</div>
+</body>
+</html>

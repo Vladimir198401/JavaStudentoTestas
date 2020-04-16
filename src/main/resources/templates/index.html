@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Java Studento Testas</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="menu.css">
+	<style>
+	body {
+		padding: 0px;
+		margin: 0px;
+		text-align: center;
+		width:100%;
+	}
+	</style>
+</head>
+<body>
+	<div id="menu">
+		<ul id="menu_sarasas">
+			<li id="menu_punktas" th:each="menu_item : ${lst_menu}">			
+				<a th:href="${menu_item.itemurl()}" th:text="${menu_item.naujasPavadinimas()}"></a>
+			</li>
+		</ul>
+	</div>
+		<div id="main">
+			<h3>Home page</h3>
+			<p> Prasome rinktis norima menu punkta
+			</p>
+		</div>
+</body>
+</html>
