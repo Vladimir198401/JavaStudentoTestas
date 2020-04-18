@@ -53,7 +53,7 @@
 				return true;
 		      }
 		}
-		/*
+		 
 		function checkRegexp( o, regexp, n ) {
 			if ( !( regexp.test( o.val() ) ) ) {
 				o.addClass( "ui-state-error" );
@@ -63,14 +63,14 @@
 				return true;
 		      }
 		}
-		*/
+ 
 		
 		function addProduct() {
 			var valid = true;
 			 allFields.removeClass( "ui-state-error" );
 		 
-			valid = valid;// && checkLength( pav, "Atsakimo pavadinimo", 1, 30 );
-			//valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
+			valid = valid  && checkLength( pav, "Atsakimo pavadinimo", 1, 30 );
+			valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
 
 			if ( valid ) {
 				

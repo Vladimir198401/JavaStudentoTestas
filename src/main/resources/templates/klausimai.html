@@ -51,8 +51,8 @@
 			} else {
 				return true;
 		      }
-		}
-		/*
+		} 
+		
 		function checkRegexp( o, regexp, n ) {
 			if ( !( regexp.test( o.val() ) ) ) {
 				o.addClass( "ui-state-error" );
@@ -62,14 +62,13 @@
 				return true;
 		      }
 		}
-		*/
 		
 		function addProduct() {
 			var valid = true;
 			 allFields.removeClass( "ui-state-error" );
 		 
-			valid = valid ;//&& checkLength( pav, "Klausimo pavadinimo", 1, 30 );
-			//valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
+			valid = valid && checkLength( pav, "Klausimo pavadinimo", 1, 30 );
+			valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
 
 			// valid = valid && checkRegexp( Pavadinimas, /^[a-z]([0-9a-z_\s])+$/i, "product may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 	 
@@ -130,7 +129,7 @@
 			
 				$( '#pav_veiksmo' ).html (  'Koreguojamas įrašas' );
 				
-				$('#pav').html($( this ).data ( 'pav' ));
+				$('#pav').val($( this ).data ( 'pav' ));
 				$( '#id_taisomo_iraso' ).val($( this ).data( 'id' ));
 				$( '#nr_taisomo_iraso' ).val($( this ).data( 'nr' ));
 				$("#verte").val( $( this ).data( 'verte' ));
@@ -174,7 +173,7 @@
 				<input type="number" name="verte" id="verte" value="" class="text ui-widget-content ui-corner-all" required>
 				
 				<label for="nr"> nr </label><br>
-				<input type="number" name="nr" id="nr" value="" class="text ui-widget-content ui-corner-all" required>
+				<input type="number" name="nr" id="nr_taisomo_iraso" value="" class="text ui-widget-content ui-corner-all" required>
 				
 				<input type="hidden" name="veiksmas" id="veiksmas" value="papildyti">
 				<input type="hidden" name="id" id="id_taisomo_iraso" value="0">
@@ -197,7 +196,7 @@
 			<tbody>
 				<tr th:each="klausimas: ${lst}">
 						<td>
-							<input type="button" class="keisti" value="keisti" id="keisti" th:attr="data-id=${klausimas.getId()},data-pav=${klausimas.getPav()}, data-verte=${klausimas.getVerte()}">
+							<input type="button" class="keisti" value="keisti" id="keisti" th:attr="data-id=${klausimas.getId()},data-pav=${klausimas.getPav()},data-nr=${klausimas.getNr()}, data-verte=${klausimas.getVerte()}">
 							<input type="button" class="salinti" value="šalinti" id="salinti" th:attr="data-id=${klausimas.getId()},data-pav=${klausimas.getPav()}">
 						</td>
 					<td>

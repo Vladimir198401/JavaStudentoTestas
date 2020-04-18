@@ -7,7 +7,6 @@ import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
 
 @Entity //iesko duomenu bazeje tokios lenteles
-
 public class Klausimai {
 	
     @Id
@@ -66,5 +65,5 @@ public class Klausimai {
 	public void setVerte( Double verte) {
 		this.verte = verte;
 	}
-	 
+
 }

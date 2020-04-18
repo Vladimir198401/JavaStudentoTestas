@@ -96,7 +96,7 @@ public class PageController {
     			
         		klausimas = found.get();
         		klausimas.setId(id);
-        		klausimas.setId(nr);
+        		klausimas.setNr(nr);
         		klausimas.setPav(pav);
         		klausimas.setVerte(verte);
         		klausimai_rep.save(klausimas);
