@@ -20,7 +20,7 @@
 		verte = $("#verte"),
 		id = $("#id"),
 		nr = $("#nr"),
-		allFields = $( [] ).add( pav).add(verte),
+		allFields = $( [] ).add( pav).add(verte).add(nr),
 		tips = $( ".validateTips" );
 	 
 		function updateTips( t ) {
@@ -63,12 +63,13 @@
 		      }
 		}
 		*/
+		
 		function addProduct() {
 			var valid = true;
 			 allFields.removeClass( "ui-state-error" );
 		 
-			valid = valid && checkLength( pav, "Klausimo pavadinimo", 1, 30 );
-			valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
+			valid = valid ;//&& checkLength( pav, "Klausimo pavadinimo", 1, 30 );
+			//valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
 
 			// valid = valid && checkRegexp( Pavadinimas, /^[a-z]([0-9a-z_\s])+$/i, "product may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 	 
@@ -80,7 +81,7 @@
 			}
 			return valid;
 		}
-	 
+		
 		dialog = $( "#dialog-form" ).dialog({
 			autoOpen: false,
 			height: 400,
