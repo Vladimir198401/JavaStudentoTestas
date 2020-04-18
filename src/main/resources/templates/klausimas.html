@@ -19,6 +19,7 @@
 		pav = $( "#pav" ),
 		verte = $("#verte"),
 		id = $("#id"),
+		nr = $("#nr"),
 		allFields = $( [] ).add( pav).add(verte),
 		tips = $( ".validateTips" );
 	 
@@ -41,6 +42,7 @@
 				return true;
 		      }
 		}
+		
 		function checkNumber( o, n, min, max ) {
 			if ( parseInt ( o.val() ) > max || parseInt ( o.val() ) < min ) {
 				o.addClass( "ui-state-error" );
@@ -51,6 +53,7 @@
 				return true;
 		      }
 		}
+		/*
 		function checkRegexp( o, regexp, n ) {
 			if ( !( regexp.test( o.val() ) ) ) {
 				o.addClass( "ui-state-error" );
@@ -60,7 +63,7 @@
 				return true;
 		      }
 		}
-	 
+		*/
 		function addProduct() {
 			var valid = true;
 			 allFields.removeClass( "ui-state-error" );
@@ -127,6 +130,7 @@
 				
 				$('#pav').html($( this ).data ( 'pav' ));
 				$( '#id_taisomo_iraso' ).val($( this ).data( 'id' ));
+				$( '#nr_taisomo_iraso' ).val($( this ).data( 'nr' ));
 				$("#verte").val( $( this ).data( 'verte' ));
 				
 				$( '#veiksmas' ).val ( 'pakeisti' );

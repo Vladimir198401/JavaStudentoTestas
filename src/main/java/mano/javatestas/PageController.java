@@ -123,6 +123,7 @@ public class PageController {
 	@RequestMapping(path="/klausimas", method={ RequestMethod.GET, RequestMethod.POST })
     public String klausimas(
     		@RequestParam(name="id", required=false, defaultValue="") Integer id
+    		,@RequestParam(name="nr", required=false, defaultValue="") Integer nr
     		, @RequestParam(name="id_kl", required=false, defaultValue="") Integer id_kl    		
     		, @RequestParam(name="pav", required=false, defaultValue="") String pav
     		, @RequestParam(name="teisingas", required=false, defaultValue="0") Integer teisingas
