@@ -17,15 +17,18 @@
 	$( function() {
 		var dialog, form,
 		pav = $( "#pav" ),
-		allFields = $( [] ).add( pav),
+		verte = $("#verte"),
+		id = $("#id"),
+		allFields = $( [] ).add( pav).add(verte),
 		tips = $( ".validateTips" );
 	 
 		function updateTips( t ) {
-		      tips.text( t ).addClass( "ui-state-highlight" );
-			setTimeout(function() {
-				tips.removeClass( "ui-state-highlight", 1500 );
-			}
-			, 500 );
+		      tips
+			.text( t )
+			.addClass( "ui-state-highlight" );
+		      setTimeout(function() {
+			tips.removeClass( "ui-state-highlight", 1500 );
+		      }, 500 );
 		}
  
 		function checkLength( o, n, min, max ) {
@@ -63,6 +66,7 @@
 			 allFields.removeClass( "ui-state-error" );
 		 
 			valid = valid && checkLength( pav, "Atsakimo pavadinimo", 1, 30 );
+			valid = valid && checkNumber( verte, "Vertes", 0, 1000 ); 
 
 			if ( valid ) {
 				
@@ -80,7 +84,7 @@
 			modal: true,
 			buttons: {
 				"Sukurti": addProduct,
-				Atšaukti: function() {
+				Atsaukti: function() {
 					dialog.dialog( "close" );
 				}
 			},
@@ -114,25 +118,29 @@
 			$( '#veiksmas' ).val ( 'papildyti' );
 			dialog.dialog( "open" );
 		});
+		
 		$( ".keisti" ).each ( function() {
 		
 			$( this ).on( "click", function() {
 			
-				id = $( this ).data( 'id' );
-				$( '#id_taisomo_iraso' ).val ( id);
 				$( '#pav_veiksmo' ).html (  'Koreguojamas įrašas' );
-				$('#pav').val( $( this ).data ( 'pav' ));
+				
+				$('#pav').val(  $( this ).data ( 'pav' ));
+				$( '#id_taisomo_iraso' ).val($( this ).data( 'id' ));
+				$("#verte").val( $( this ).data( 'verte' ));
+				
 				$( '#veiksmas' ).val ( 'pakeisti' );
+				
 				dialog.dialog( "open" );	
 			});
 		});
+		
 		$( ".salinti" ).each ( function() {
 		
 			$( this ).on( "click", function() {
 			
-				id = $( this ).data( 'id' );
-				$( '#id_salinamo_iraso' ).val ( id );
-				$( '#pav_salinamo_iraso' ).html ( $( this ).data ( 'pav' ) );				
+				$( '#id_salinamo_iraso' ).val ($( this ).data( 'id' ));
+				$( '#pav_salinamo_iraso' ).html ( $( this ).data ( 'pav' ));				
 				trintidialog.dialog( "open" );	
 			});
 		});
